@@ -1,0 +1,41 @@
+{
+  "name": "@suey/packages",
+  "version": "1.0.9",
+  "author": "suey",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": "Packages created for rapid construction projects.",
+  "main": "index.ts",
+  "keywords": ["suey", "packages", "axios", "encrypt", "judge", "judgeType"],
+  "scripts": {
+    "tsc": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "axios": "^1.3.4",
+    "crypto-ts": "^1.0.2",
+    "jsrsasign": "^10.7.0",
+    "ts-md5": "^1.3.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:iqseternal/suey-packages.git"
+  },
+  "exports": {
+    ".": {
+      "import": "./index.ts",
+      "require": "./index.js"
+    },
+    "./fnUtils": {
+      "import": "./fnUtils/index.ts",
+      "require": "./fnUtils/index.js"
+    },
+    "./request": {
+      "import": "./request/index.ts",
+      "require": "./request/index.js"
+    }
+  },
+  "devDependencies": {
+    "@types/jsrsasign": "^10.5.8"
+  }
+}

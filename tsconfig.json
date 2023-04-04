@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ESNext",
+    "sourceMap": false,
+    "baseUrl": ".",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "removeComments": true,
+    "allowJs": false,
+    "noImplicitAny": true,
+    "lib": ["DOM", "ES2015.Promise", "ESNext"]
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "typeRoots": [
+    "node_modules/@types"
+  ],
+  "include": ["./index.ts", "./fnUtils/**/*.ts", "./request/**/*.ts"]
+}
