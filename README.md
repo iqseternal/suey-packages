@@ -11,7 +11,6 @@
 
 
 
-
 .. code::
 .
 |-- fnUtils
@@ -20,14 +19,14 @@
 |   |-- judgeType.ts  类型判断相关函数
 |    -- random.ts
 
-|    -- request 
+|    -- request
      |-- index.ts
      `-- request.ts  关于axios的二次封装函数
 
 
 
 ```javascript
-import { isType, isBoolean, isNull, isUnDef } from '../index';
+import { isType, isBoolean, isNull, isUnDef } from '@suey/packages';
 
 const isObject = isType('Object');
 
@@ -41,8 +40,8 @@ isNull(null); // true
 
 // 引入加密函数, 还有 md5, aesEncryptAlgorithm, aesDecryptAlgorithm, aesEncrypt, aesDecrypt
 // rsaEncryptAlgorithm, rsaDecryptAlgorithm
-import { aesDecrypt } from '../index';
-import { createApiRequest, REQ_METHODS } from '../index';
+import { aesDecrypt } from '@suey/packages';
+import { createApiRequest, REQ_METHODS } from '@suey/packages';
 
 // 可以像如下方式创建请求
 const { request, apiGet, apiPost, createApi } = createApiRequest('http://localhost:3000', {
@@ -50,14 +49,14 @@ const { request, apiGet, apiPost, createApi } = createApiRequest('http://localho
     if (!config.headers) config.headers = {};
 
     let token = 'Bearer token......';
-    
+
     if (config.hConfig?.needAuth) {
-    
+
       if (config.hConfig?.encryption) token = aesDecrypt(token);
-    
+
       config.headers['authorization'] = token;
     }
-    
+
     if (config.hConfig?.needTimestamp) config.headers['_t'] = new Date().getTime();
 
   }
