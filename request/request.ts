@@ -83,7 +83,8 @@ export const createApiRequest = (baseURL: string, sendPre?: SendPreFn, respAft?:
     return (url: string, apiConfig?: ApiRequestConfig): AxiosPromise => {
       const hConfig: HConfig = {
         needAuth: apiConfig?.needAuth,
-        encryption: apiConfig?.encryption
+        encryption: apiConfig?.encryption,
+        needTimestamp: apiConfig.needTimestamp
       }
 
       delete apiConfig?.needAuth;

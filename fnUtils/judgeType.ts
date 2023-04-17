@@ -38,4 +38,32 @@ export const isArray = <T = any>(target: T): boolean => target && Array.isArray(
 export const isUrl = (path: string): boolean =>
 isString(path) && /^(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?(\/#\/)?(?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/.test(path)
 
-export const isDate = (val: unknown): val is Date => isType('Date')(val)
+export const isDate = (val: unknown): val is Date => isType('Date')(val);
+
+export const isClass = (target: any): boolean => {
+
+  if (typeof target !== 'function') return false;
+
+  const __str__ = target.toString();
+
+  if (target.prototype === undefined) return false;
+
+  if (target.prototype.constructor !== target) return false;
+
+  if (__str__.slice(0, 5) === 'class') return true;
+
+  if (Object.getOwnPropertyNames(target.prototype).length >= 2) return true;
+
+  if (/^function\s+\(|^function\s+anonymous\(/.test(__str__)) return false;
+
+  if (/^function\s+[A-Z]/.test(__str__)) return true;
+
+  if (/\b\(this\b|\bthis[\.\[]\b/.test(__str__)) {
+
+    if (/classCallCheck\(this/.test(__str__)) return true;
+
+    return /^function\sdefault_\d+\s*\(/.test(__str__);
+  }
+
+  return false;
+}
