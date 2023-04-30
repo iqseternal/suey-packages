@@ -1,0 +1,11 @@
+export declare const aesEncryptAlgorithm: <T>(value: T, encryptKey: string) => string;
+export declare const aesDecryptAlgorithm: <T>(text: string, encryptKey: string) => T;
+export declare const AES_DEFAULT_KEY = "crypto-ts";
+export type AesEncryptFn = <T>(value: T) => string;
+export declare const aesEncrypt: AesEncryptFn;
+export type AesDecryptFn = <T>(text: string) => T;
+export declare const aesDecrypt: AesDecryptFn;
+export type Md5EncryptFn = (...args: string[]) => string;
+export declare const md5Encrypt: Md5EncryptFn;
+export declare const rsaEncryptAlgorithm: (text: string, publicKey: string) => string;
+export declare const rsaDecryptAlgorithm: (text: string, privateKey: string) => string;

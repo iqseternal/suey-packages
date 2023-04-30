@@ -54,7 +54,8 @@ const createApiRequest = (baseURL, sendPre, respAft) => {
         return (url, apiConfig) => {
             const hConfig = {
                 needAuth: apiConfig?.needAuth,
-                encryption: apiConfig?.encryption
+                encryption: apiConfig?.encryption,
+                needTimestamp: apiConfig.needTimestamp
             };
             delete apiConfig?.needAuth;
             delete apiConfig?.encryption;
