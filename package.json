@@ -1,6 +1,6 @@
 {
   "name": "@suey/packages",
-  "version": "1.0.19",
+  "version": "1.0.24",
   "author": "suey",
   "license": "ISC",
   "type": "commonjs",
@@ -15,8 +15,8 @@
     "judgeType"
   ],
   "scripts": {
-    "tsc:storage": "tsc ./storage/index.ts --noEmit --moduleResolution node --module esnext --declarationDir ./storage --declaration --noEmitOnError && tsc",
-    "tsc": "tsc",
+    "tsc:storage": "tsc ./storage/index.ts --declaration",
+    "tsc": "tsc && npm run tsc:storage",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -50,8 +50,5 @@
       "import": "./storage/index.ts",
       "types": "./storage/index.d.ts"
     }
-  },
-  "devDependencies": {
-    "@types/jsrsasign": "^10.5.8"
   }
 }
