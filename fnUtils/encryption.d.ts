@@ -1,5 +1,5 @@
-export declare const aesEncryptAlgorithm: <T>(value: T, encryptKey: string) => string;
-export declare const aesDecryptAlgorithm: <T>(text: string, encryptKey: string) => T;
+export declare const aesEncryptAlgorithm: (value: string, encryptKey: string) => string;
+export declare const aesDecryptAlgorithm: (text: string, encryptKey: string) => string;
 export declare const AES_DEFAULT_KEY = "crypto-ts";
 export type AesEncryptFn = <T>(value: T) => string;
 export declare const aesEncrypt: AesEncryptFn;

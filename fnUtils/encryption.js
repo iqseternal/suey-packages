@@ -30,10 +30,15 @@ exports.rsaDecryptAlgorithm = exports.rsaEncryptAlgorithm = exports.md5Encrypt =
 const crypto = __importStar(require("crypto-ts"));
 const ts_md5_1 = require("ts-md5");
 const jsrsasign_1 = __importDefault(require("jsrsasign"));
-const aesEncryptAlgorithm = (value, encryptKey) => crypto.AES.encrypt(JSON.stringify(value), encryptKey).toString();
+const aesEncryptAlgorithm = (value, encryptKey) => crypto.AES.encrypt(value, encryptKey).toString();
 exports.aesEncryptAlgorithm = aesEncryptAlgorithm;
-const aesDecryptAlgorithm = (text, encryptKey) => {
-    const str = crypto.AES.decrypt(text, encryptKey).toString((crypto.enc.Utf8));
+const aesDecryptAlgorithm = (text, encryptKey) => crypto.AES.decrypt(text, encryptKey).toString((crypto.enc.Utf8));
+exports.aesDecryptAlgorithm = aesDecryptAlgorithm;
+exports.AES_DEFAULT_KEY = 'crypto-ts';
+const aesEncrypt = (value) => (0, exports.aesEncryptAlgorithm)(JSON.stringify(value), exports.AES_DEFAULT_KEY);
+exports.aesEncrypt = aesEncrypt;
+const aesDecrypt = (text) => {
+    const str = (0, exports.aesDecryptAlgorithm)(text, exports.AES_DEFAULT_KEY);
     try {
         return JSON.parse(str);
     }
@@ -41,11 +46,6 @@ const aesDecryptAlgorithm = (text, encryptKey) => {
         return str;
     }
 };
-exports.aesDecryptAlgorithm = aesDecryptAlgorithm;
-exports.AES_DEFAULT_KEY = 'crypto-ts';
-const aesEncrypt = (value) => (0, exports.aesEncryptAlgorithm)(value, exports.AES_DEFAULT_KEY);
-exports.aesEncrypt = aesEncrypt;
-const aesDecrypt = (text) => (0, exports.aesDecryptAlgorithm)(text, exports.AES_DEFAULT_KEY);
 exports.aesDecrypt = aesDecrypt;
 const md5Encrypt = (...args) => {
     const md5 = new ts_md5_1.Md5();
