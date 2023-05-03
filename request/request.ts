@@ -15,8 +15,8 @@ export interface RequestConfig extends AxiosRequestConfig {
 type RequestFn = (payload: RequestConfig) => AxiosPromise;
 type Interceptors<K, V> = { onFulfilled?: (config: K) => V;onRejected?: (config: K) => V; };
 
-type SendPreFn = Interceptors<RequestConfig, void>;
-type RespAftFn = Interceptors<AxiosResponse, AxiosPromise<AxiosResponse>>;
+export type SendPreFn = Interceptors<RequestConfig, void>;
+export type RespAftFn = Interceptors<AxiosResponse, AxiosPromise<AxiosResponse>>;
 
 /**
  * 采用柯里化思想，将请求封装出去
@@ -84,7 +84,7 @@ export const createApiRequest = (baseURL: string, sendPre?: SendPreFn, respAft?:
       const hConfig: HConfig = {
         needAuth: apiConfig?.needAuth,
         encryption: apiConfig?.encryption,
-        needTimestamp: apiConfig.needTimestamp
+        needTimestamp: apiConfig?.needTimestamp
       }
 
       delete apiConfig?.needAuth;

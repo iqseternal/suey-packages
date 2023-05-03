@@ -21,8 +21,8 @@ type Interceptors<K, V> = {
     onFulfilled?: (config: K) => V;
     onRejected?: (config: K) => V;
 };
-type SendPreFn = Interceptors<RequestConfig, void>;
-type RespAftFn = Interceptors<AxiosResponse, AxiosPromise<AxiosResponse>>;
+export type SendPreFn = Interceptors<RequestConfig, void>;
+export type RespAftFn = Interceptors<AxiosResponse, AxiosPromise<AxiosResponse>>;
 export default function createRequest(baseURL: string, sendPre?: SendPreFn, respAft?: RespAftFn, config?: AxiosRequestConfig): RequestFn;
 export declare const createApiRequest: (baseURL: string, sendPre?: SendPreFn, respAft?: RespAftFn) => {
     request: RequestFn;

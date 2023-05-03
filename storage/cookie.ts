@@ -5,12 +5,9 @@ import { isDef } from '../fnUtils/judgeType';
 import { RemoveFn, GetOptions, SetOptions, AES_DEFAULT_KEY, SetTimeFn } from './fnType';
 
 export const ckGet = <T extends string>(key: string, options?: Partial<GetOptions>): T | null => {
-  const data = Cookies.get(key);
+  let data = Cookies.get(key);
 
-  if (options?.decrypt) {
-    return aesDecryptAlgorithm<T>(data, options.aesKey ?? AES_DEFAULT_KEY);
-  }
-
+  if (options?.decrypt) data = aesDecryptAlgorithm(data, options.aesKey ?? AES_DEFAULT_KEY);
   return data;
 }
 
@@ -19,14 +16,10 @@ export function ckSet<T>(key: string, value: T, options?: Partial<SetOptions>): 
 export function ckSet<T>(key: string, value: T, time?: number, options?: Partial<SetOptions>): void;
 export function ckSet<T>(key: string, value: T, time?: number | Partial<SetOptions>, options?: Partial<SetOptions>): void {
   if (isDef(options)) {
-    if (typeof time !== 'number') {
-      throw new TypeError(``);
-    }
+    if (typeof time !== 'number') throw new TypeError(``);
 
     let v: string;
-    if (options?.encrypt) {
-      v = aesEncryptAlgorithm(value, options.aesKey ?? AES_DEFAULT_KEY);
-    }
+    if (options?.encrypt) v = aesEncryptAlgorithm(JSON.stringify(value), options.aesKey ?? AES_DEFAULT_KEY);
     else v = JSON.stringify(value);
 
     Cookies.set(key, v, { expires: time });
@@ -36,7 +29,7 @@ export function ckSet<T>(key: string, value: T, time?: number | Partial<SetOptio
   if (typeof time === 'object') {
     let v: string;
     if (options?.encrypt) {
-      v = aesEncryptAlgorithm(value, options.aesKey ?? AES_DEFAULT_KEY);
+      v = aesEncryptAlgorithm(JSON.stringify(value), options.aesKey ?? AES_DEFAULT_KEY);
     }
     else v = JSON.stringify(value);
 

@@ -14,8 +14,7 @@ import rsa from 'jsrsasign';
  * @param {string} key 加密的key值
  * @returns {string}
  */
-export const aesEncryptAlgorithm = <T>(value: T, encryptKey: string) =>
-  crypto.AES.encrypt(JSON.stringify(value), encryptKey).toString();
+export const aesEncryptAlgorithm = (value: string, encryptKey: string) => crypto.AES.encrypt(value, encryptKey).toString();
 
 /**
  *
@@ -23,19 +22,20 @@ export const aesEncryptAlgorithm = <T>(value: T, encryptKey: string) =>
  * @param {string} key 解密的key值
  * @returns {T}
  */
-export const aesDecryptAlgorithm = <T>(text: string, encryptKey: string): T => {
-  const str = crypto.AES.decrypt(text, encryptKey).toString((crypto.enc.Utf8));
-  try { return JSON.parse(str) as unknown as T;  }
-  catch { return str as unknown as T; }
-}
+export const aesDecryptAlgorithm = (text: string, encryptKey: string) => crypto.AES.decrypt(text, encryptKey).toString((crypto.enc.Utf8));
 
 export const AES_DEFAULT_KEY = 'crypto-ts';
 
 export type AesEncryptFn = <T>(value: T) => string;
-export const aesEncrypt: AesEncryptFn = <T>(value: T): string => aesEncryptAlgorithm(value, AES_DEFAULT_KEY);
+export const aesEncrypt: AesEncryptFn = <T>(value: T) => aesEncryptAlgorithm(JSON.stringify(value), AES_DEFAULT_KEY);
+
 
 export type AesDecryptFn = <T>(text: string) => T;
-export const aesDecrypt: AesDecryptFn = <T>(text: string): T => aesDecryptAlgorithm(text, AES_DEFAULT_KEY);
+export const aesDecrypt: AesDecryptFn = <T>(text: string): T => {
+  const str = aesDecryptAlgorithm(text, AES_DEFAULT_KEY);
+  try { return JSON.parse(str) as T; }
+  catch { return str as unknown as T; }
+}
 
 export type Md5EncryptFn = (...args: string[]) => string;
 export const md5Encrypt: Md5EncryptFn = (...args: string[]) => {
