@@ -1,22 +1,29 @@
-import { GetFn, SetFn, RemoveFn, ClearFn } from './fnType';
 
-if (!window) throw new Error(`not have window...`);
-const storage = window.localStorage;
+import { initStorage } from './_storage';
 
-if (!storage) throw new Error(`not have window.localStorage...`);
+const { get, set, remove, clear } = initStorage('localStorage');
 
-export const loGet: GetFn = <T>(key: string): T | null => {
-  let data = storage.getItem(key);
-  if (data === null) return null;
-  try { return JSON.parse(data) as T; }
-  catch { return data as unknown as T; }
-}
-
-export const loSet: SetFn = <T>(key: string, value: T): void => {
-  let data = JSON.stringify(value);
-  storage.setItem(key, data);
-}
-
-export const loRemove: RemoveFn = (key: string): void => storage.removeItem(key);
-
-export const loClear: ClearFn = () => storage.clear();
+/**
+ * localStorage 的 get 方法
+ * @param {string} key 存储key
+ * @returns {T | null} 返回存储的数据
+ */
+export const loGet = get;
+/**
+ * localStorage 的 set 方法
+ * @param {string} key 存储key
+ * @param {T} value 存储的数据
+ * @returns {void}
+ */
+export const loSet = set;
+/**
+ * localStorage 的 remove 方法
+ * @param {string} key 存储key
+ * @returns {void}
+ */
+export const loRemove = remove;
+/**
+ * localStorage 的 clear 方法
+ * @returns {void}
+ */
+export const loClear = clear;

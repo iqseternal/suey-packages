@@ -1,4 +1,9 @@
 "use strict";
+/**
+ * **********************
+ * 请注意, 此模块应在浏览器环境下运行
+ * **********************
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.seClear = exports.seRemove = exports.seSet = exports.seGet = exports.loClear = exports.loRemove = exports.loSet = exports.loGet = exports.ckRemove = exports.ckSet = exports.ckGet = void 0;
 var cookie_1 = require("./cookie");

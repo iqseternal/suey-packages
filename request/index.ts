@@ -1,7 +1,4 @@
-import request from './request';
-import { REQ_METHODS } from './request';
 
-export { REQ_METHODS };
 
 export type {
   HConfig, ApiRequestConfig, RequestConfig,
@@ -9,8 +6,8 @@ export type {
   SendPreFn, RespAftFn
 } from './request';
 
-export { createApiRequest } from './request';
+export { REQ_METHODS } from './request';
 
-export { request };
+export { createApiRequest, default as request } from './request';
 
-export { type ApiPromise } from './type';
+

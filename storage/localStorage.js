@@ -1,29 +1,29 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.loClear = exports.loRemove = exports.loSet = exports.loGet = void 0;
-if (!window)
-    throw new Error("not have window...");
-var storage = window.localStorage;
-if (!storage)
-    throw new Error("not have window.localStorage...");
-var loGet = function (key) {
-    var data = storage.getItem(key);
-    if (data === null)
-        return null;
-    try {
-        return JSON.parse(data);
-    }
-    catch (_a) {
-        return data;
-    }
-};
-exports.loGet = loGet;
-var loSet = function (key, value) {
-    var data = JSON.stringify(value);
-    storage.setItem(key, data);
-};
-exports.loSet = loSet;
-var loRemove = function (key) { return storage.removeItem(key); };
-exports.loRemove = loRemove;
-var loClear = function () { return storage.clear(); };
-exports.loClear = loClear;
+var _storage_1 = require("./_storage");
+var _a = (0, _storage_1.initStorage)('localStorage'), get = _a.get, set = _a.set, remove = _a.remove, clear = _a.clear;
+/**
+ * localStorage 的 get 方法
+ * @param {string} key 存储key
+ * @returns {T | null} 返回存储的数据
+ */
+exports.loGet = get;
+/**
+ * localStorage 的 set 方法
+ * @param {string} key 存储key
+ * @param {T} value 存储的数据
+ * @returns {void}
+ */
+exports.loSet = set;
+/**
+ * localStorage 的 remove 方法
+ * @param {string} key 存储key
+ * @returns {void}
+ */
+exports.loRemove = remove;
+/**
+ * localStorage 的 clear 方法
+ * @returns {void}
+ */
+exports.loClear = clear;

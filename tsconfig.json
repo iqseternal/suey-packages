@@ -9,7 +9,7 @@
     "declarationDir": ".",
     "declaration": true,
     "noEmitOnError": false,
-    "removeComments": true,
+    "removeComments": false,
     "allowJs": false,
     "noImplicitAny": true,
     "lib": ["DOM", "ES2015.Promise", "ESNext"]
